@@ -1,5 +1,8 @@
 <?php
 
+  $header = $_POST['header'];
+  $content =  $_POST['content'];
+  $footer = $_POST['footer'];
   $page_name = $_POST["page_name"];
   $page_ext = $_POST["page_ext"];
   $file_name = $page_name.$page_ext;
