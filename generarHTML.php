@@ -5,7 +5,7 @@
   $tabla = $_POST['tabla'];
   $page_name = $tabla."_view";
   $page_ext = ".html";
-  
+
   $file_name = $page_name.$page_ext;
 
   $id = $_SESSION['id'];
@@ -19,6 +19,7 @@
   <div>
   <center>
      <img src=\".\LogoStimey.jpg\" alt=\"Logo Stimey\"/>
+     <br> Mostrando tabla $tabla <br>
   <table border = 1><br>";
 
 

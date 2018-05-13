@@ -6,9 +6,10 @@
 
     // Establecemos conexión con la base de datos
     if(!isset($_SESSION)){session_start();}
+    $user = $_SESSION['usuario'];
 
-
-  	$select_header = "<html>
+  	$select_header = "<!DOCTYPE html>
+    <html lang=\"es\">
       <head>
         <title>
           Table Select
@@ -23,14 +24,12 @@
         <img src=\".\LogoStimey.jpg\" alt=\"Logo Stimey\"/>
         <form name=\"selectListaAdmin\" action=\"generarHTML.php\" method=\"post\">
            <div>
-              <?php
-                 session_start();
-                 echo \"Bienvenido: \". $_SESSION['usuario'];?>
+            Bienvenido: $user;
               <br><br>
               Seleccione la tabla a la que desea acceder.
               <br><br>";
 
-    $select_body = "<select name=\"origen\" id=\"origen\">
+    $select_body = "<select name=\"tabla\" id=\"origen\">
        <option value=\"usuarios\">Usuarios</option>
        <option value=\"grupos\">Grupos</option>
        <option value=\"incidences\" >Incidencias</option>
@@ -42,7 +41,7 @@
        <option value=\"existences\" >Existencias</option>
        <option value=\"fa\" >Inmovilizado</option>
     </select>
-    <input type=\"submit\" value=\"Cargar\" name=\"cargar\" onclick=\" >";
+        <button type = \"submit\">Mostrar</button>";
 
     $select_footer = " </div>
   </form>
@@ -51,7 +50,7 @@
 </html>";
 
 
-
-
+    $select = $select_header.$select_welcome.$select_body.$select_footer;
+    echo $select;
 
 ?>

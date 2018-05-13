@@ -19,40 +19,43 @@
     $group = $row[0];
 
     // Comprobamos que el resultado es correcto
-    echo $group;
-
-    if($group == 5)
+    if($group == 6)
+    {
         header("Location: generarListaAdmin.php");
+        exit();
+    }
 
-    // Buscamos la tabla del grupo al que pertenece el usuario
-    $consulta = "SELECT tabla from grupos where id = '".$group."'";
-    $result = mysqli_query($conexion, $consulta);
-    $row = mysqli_fetch_array($result);
-    $tabla = $row[0];
+    else
+    {
+        // Buscamos la tabla del grupo al que pertenece el usuario
+        $consulta = "SELECT tabla from grupos where id = '".$group."'";
+        $result = mysqli_query($conexion, $consulta);
+        $row = mysqli_fetch_array($result);
+        $tabla = $row[0];
 
-    // Comprobamos que el resultado es correcto
-    echo $tabla;
+        // Comprobamos que el resultado es correcto
+        $post_header = "<html>
+          <head>
+            <title>
+              POST Request
+                </title>
+                <meta charset=\"UTF-8\">
+           </head>
+         ";
 
-    $post_header = "<html>
-      <head>
-        <title>
-          POST Request
-		    </title>
-		    <meta charset=\"UTF-8\">
-	   </head>
-     ";
+         $post_body = "
+         <body>
+            <form method = \"POST\" action = \"generarHTML.php\">
+                <input type = \"hidden\" name = \"tabla\" value = \"$tabla\">
+            </form>
+        </body>
+          ";
 
-     $post_body = "
-     <body>
-        <form method = \"POST\" action = \"generarHTML.php\">
-            <input type = \"hidden\" name = \"tabla\" value = \"$tabla\">
-        </form>
-    </body>
-      ";
+          $post_footer = "</html>";
 
-      $post_footer = "</html>";
+          $post_request = $post_header.$post_body.$post_footer;
+          echo $post_request;
+          header("Location: generarHTML.php");
+    }
 
-      $post_request = $post_header.$post_body.$post_footer;
-      echo $post_request;
-      header("Location: generarHTML.php");
 ?>
