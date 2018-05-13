@@ -40,7 +40,7 @@ if($row = mysqli_fetch_array($result)){
 		$_SESSION['usuario'] = $usuario;
 		$_SESSION['id'] = $id_user;
 		$_SESSION['grupo'] = $id_group;
-		header("Location: generarTabla.php");
+		header("Location: generarTablaInicial.php");
 	}else{
 		header("Location: Index.html");
 		exit();

@@ -7,7 +7,7 @@
     // Establecemos conexión con la base de datos
     if(!isset($_SESSION)){session_start();}
 
-    $tabla = $_POST['origen']
+    $tabla = $_POST['origen'];
 
   	$user_id = $_SESSION['id'];
     $conexion = mysqli_connect ("localhost", "root", "", "Stimey")
