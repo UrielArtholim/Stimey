@@ -1,7 +1,6 @@
 <?php
   if(!isset($_SESSION)){session_start();}
-  //$table = $_POST['table'];
-  $tabla = "status";
+  $tabla = $_POST['tabla'];
   //$page_name = $_POST["page_name"];
   $page_name = $tabla."_view";
   $page_ext = ".html";
@@ -17,6 +16,7 @@
   <body>
   <div>
   <center>
+     <img src=\".\LogoStimey.jpg\" alt=\"Logo Stimey\"/>
   <table border = 1><br>";
 
 
