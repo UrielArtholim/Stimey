@@ -24,11 +24,12 @@ if($row = mysqli_fetch_array($result)){
 		date_default_timezone_set("Europe/Madrid");
 		$fecha = new DateTime();
 		$entrada = $fecha->format('Y-m-d H:i:s');
-		$consulta = "SELECT id from usuarios where username = '".$usuario."'
+		$consulta = "SELECT * from usuarios where username = '".$usuario."'
 			and password = '".$pass."'";
 		$result = mysqli_query($connection, $consulta);
 		$user_array = mysqli_fetch_array($result);
 		$id_user = $user_array[0];
+		$id_group = $user_array[3];
 		echo "El id del usuario es: '".$id_user."'";
 
 		$consulta = "UPDATE usuarios set lastEntry = '".$entrada."'
@@ -38,7 +39,8 @@ if($row = mysqli_fetch_array($result)){
 
 		$_SESSION['usuario'] = $usuario;
 		$_SESSION['id'] = $id_user;
-		header("Location: generarHTML.php");
+		$_SESSION['grupo'] = $id_group;
+		header("Location: generarTabla.php");
 	}else{
 		header("Location: Index.html");
 		exit();
