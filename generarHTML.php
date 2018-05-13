@@ -1,9 +1,11 @@
 <?php
+
   if(!isset($_SESSION)){session_start();}
+
   $tabla = $_POST['tabla'];
-  //$page_name = $_POST["page_name"];
   $page_name = $tabla."_view";
   $page_ext = ".html";
+  
   $file_name = $page_name.$page_ext;
 
   $id = $_SESSION['id'];
