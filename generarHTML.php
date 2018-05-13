@@ -1,8 +1,10 @@
 <?php
-
-  $table = $_POST['table'];
-  $page_name = $_POST["page_name"];
-  $page_ext = $_POST["page_ext"];
+  if(!isset($_SESSION)){session_start();}
+  //$table = $_POST['table'];
+  $tabla = "status";
+  //$page_name = $_POST["page_name"];
+  $page_name = $tabla."_view";
+  $page_ext = ".html";
   $file_name = $page_name.$page_ext;
 
   $id = $_SESSION['id'];
@@ -11,72 +13,69 @@
   <html lang=\"es\">
   <head>
   <meta charset=\"utf-8\">
-  <title>View</title></head>
+  <title>'".$page_name."'</title></head>
   <body>
   <div>
   <center>
-  <table border = 1>
-  ";
+  <table border = 1><br>";
 
 
   // CONTENT
   $conexion = mysqli_connect ("localhost", "root", "", "Stimey")
   			or die("Error al conectar a la base de datos");
 
-  $consulta_filas = "SELECT count(*) from " . $table . "' where id='" . $id . "'";
+  $texto_consulta_filas = "SELECT count(*) from $tabla order by id asc";
+  $consulta_filas = mysqli_real_escape_string($conexion, $texto_consulta_filas);
   $result_filas = mysqli_query($conexion, $consulta_filas);
   $row = mysqli_fetch_array($result_filas);
-  $filas = $row[1];
+  $filas = $row[0];
 
-  $consulta_columnas = "SELECT Table_Name, count(*) as num from Information_Schema.Columns where Table_Name = '".$tabla."' group by Table_Name";
+  $consulta_columnas = "SELECT Table_Name, count(*) as num from Information_Schema.Columns
+  where Table_Name = '".$tabla."' group by Table_Name";
   $result_columnas = mysqli_query($conexion, $consulta_columnas);
-  $row = mysqli_fetch_array($result_columnas);
-  $columnas = $row[0];
+  $row = mysqli_fetch_array($result_columnas, MYSQLI_NUM);
+  $columnas = $row[1];
 
-  $consulta_schema = "SELECT table_name, column_name
-    FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE table_schema = 'YourDBName'
-    ORDER BY table_name, ordinal_position";
+  $consulta_schema = "SELECT column_name from Information_Schema.Columns where table_name = '".$tabla."'";
   $result_schema = mysqli_query($conexion, $consulta_schema);
-  $schema = mysqli_fetch_array($result_schema);
 
-  $schema_text = "<tr>
+  $schema_text = "<tr><br>
   ";
 
-  for($i = 0; $i < $columnas; ++$i)
+  for($index = 0; $index < $columnas; ++$index)
   {
-    $schema_text = $schema_text."<td>'" . $schema[$i] . "'</td>
+    $schema_row = mysqli_fetch_row($result_schema);
+    $column_name = $schema_row[0];
+    $schema_text = $schema_text."<td>'" . $column_name . "'</td>
     ";
   }
-  $schema_text = $schema_text."</tr>";
 
-  echo "Schema text = ".$schema_text;
+  $schema_text = $schema_text."</tr><br>
+  ";
 
   $final_header = $header.$schema_text;
-
-  echo "Final header =".$final_header;
-
-  $consulta = "SELECT * from '" . $table . "'";
+  $consulta = "SELECT * from " . $tabla;
   $result_data = mysqli_query($conexion, $consulta);
-
-
-  while($row = mysqli_fetch_array($result_data))
+  $data = "";
+  for($index = 0; $index < $filas; ++$index)
   {
-    $data = "<tr>
+    $row = mysqli_fetch_row($result_data);
+    $data = $data."<tr><br>
     ";
+
     for($i = 0; $i < $columnas; ++$i)
     {
-      $data = $data."<td>'" . $row[$i] . "' </td>
+      $row_data = $row[$i];
+      $data = $data."<td>'" . $row_data . "' </td>
       ";
     }
-    $data = $data."</tr>";
+    $data = $data."</tr>
+    ";
   }
 
-  echo "Data = ".$data;
-  $content = $schema_text.$data;
-
-  echo "Content = ".$content;
-
+//  while()
+  {
+  $content = $data;
   $footer = "</table>
   </center>
   </div>
@@ -90,18 +89,17 @@
   else
     $mensaje = "Se ha generado el fichero $file_name \n";
 
-  if($file = fopen($file_name, "a"))
+  if($file = fopen($file_name, "w+"))
   {
       if(fwrite($file, $htmlpage))
       {
         echo "Se ha ejecutado correctamente\n";
-      //  header("Location: $file_name");
+        header("Location: $file_name");
     		exit();
       }
       else
         echo "Ha habido un problema al crear el fichero\n";
   }
-
-
+}
 
 ?>

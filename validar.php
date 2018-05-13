@@ -38,7 +38,7 @@ if($row = mysqli_fetch_array($result)){
 
 		$_SESSION['usuario'] = $usuario;
 		$_SESSION['id'] = $id_user;
-		header("Location: contenido.php");
+		header("Location: generarHTML.php");
 	}else{
 		header("Location: Index.html");
 		exit();
