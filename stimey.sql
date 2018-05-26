@@ -46,7 +46,6 @@ CREATE TABLE IF NOT EXISTS `incidencias` (
 DROP TABLE IF EXISTS `pruebas`;
 CREATE TABLE IF NOT EXISTS `pruebas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` int(11) NOT NULL,
   `user` int(11) NOT NULL,
   `supervisor` int(11) NOT NULL,
   `status` int(11) NOT NULL,
