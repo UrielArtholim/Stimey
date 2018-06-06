@@ -15,7 +15,7 @@
 				?>
 				<br>
 				<form method="POST" action="seleccionGerente.php">
-					<select name="origen" id="origen">
+					<select name="option" id="option">
 						<option value="create">Crear Usuario</option>
 						<option value="revisarSeccion">Revisar sección</option>
 						<option value="revisarIncidencias">Revisar Incidencias</option>
@@ -23,6 +23,12 @@
 				<br /><br />
 				<button type="submit">Seleccionar</button>
 				</form>
+				<br>
+				<center>
+					<form method=\"POST\" action=\"opcionesSupervisor.php\">
+        				<button type=\"submit\">Volver</button>
+					</form>
+  				</center>
 			</center>
 		</div>
 	</body>

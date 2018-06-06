@@ -75,20 +75,18 @@
   $final_header = $header.$schema_text;
   $consulta = "Select * from incidencias where test in (Select id from pruebas where supervisor = '".$id."')";
   $result_query = mysqli_query($conexion, $consulta);
-  $result_data = mysqli_fetch_row($result_query);
   $data = "";
-  echo $result_data;
-
   for($index = 0; $index < $filas; ++$index)
   {
-    $row = mysqli_fetch_row($result_data);
+    $row = mysqli_fetch_array($result_query);
     $data = $data."<tr><br>
     ";
 
     for($i = 0; $i < $columnas; ++$i)
     {
-      $row_data = $row[$i];
-      $data = $data."<td>'" . $row_data . "' </td>
+		$row_data = $row[$i];
+		echo $row_data;
+      	$data = $data."<td>'".$row_data."' </td>
       ";
     }
     $data = $data."</tr>
@@ -99,6 +97,12 @@
   {
   $content = $data;
   $footer = "</table>
+  </center>
+  <br><br>
+  <center>
+	<form method=\"POST\" action=\"opcionesSupervisor.php\">
+        <button type=\"submit\">Volver</button>
+	</form>
   </center>
   </div>
   </body>
@@ -116,7 +120,7 @@
       if(fwrite($file, $htmlpage))
       {
         echo "Se ha ejecutado correctamente\n";
-        header("Location: $file_name");
+       header("Location: $file_name");
     		exit();
       }
       else

@@ -23,6 +23,11 @@ function confirma(){
 </head>
     <body>
         <h3>Auditoría de Facturación</h3>
+        <?php if(!isset($_SESSION)) { ?>
+            <label>Usuario no Identificado</label><br><br> como: <?= $_SESSION['usuario'] ?></label><br><br>
+        <?php } else { ?>
+            <label>Identificado como: <?= $_SESSION['usuario'] ?></label><br><br>
+        <?php } ?>
         <div>
             <label>Buscar por Concepto:</label><br>
             <?= form_open(base_url()."Factura/listar_factura"); ?>
@@ -44,7 +49,7 @@ function confirma(){
                         <th scope="col">Identificación</th>
                         <th scope="col">Fecha Emision</th>
                         <th scope="col">Importe Total</th>
-                        <th scope="col">Prueba 7: Usuario Autorizado</th>
+                        <th scope="col">Usuario Comprador</th>
                         <th scope="col">Prueba 9: Unidades Compradas</th>
                         <th scope="col">Prueba 11: IVA</th>
                         <th scope="col">Ver Tests</th>
@@ -60,7 +65,7 @@ function confirma(){
                             <td data-label="Identificación"><?= $factura['identificacion'] ?></td>
                             <td data-label="Fecha Emisión"><?= $factura['fecha_emision'] ?></td>
                             <td data-label="Importe + Impuesto"><?= $factura['importe_impuesto'] ?></td>
-                            <td data-label="Prueba 7: Usuario Autorizado"><a href="<?= site_url() ?>Factura/prueba07/<?= $factura['id']?>">Ir</a></td>
+                            <td data-label="Usuario Comprador"><?= $factura['usuario'] ?><br><button onclick="location.href='<?= site_url() ?>Factura/test/prueba07/<?= $factura['id'] ?>'">Documentar Test</button></td>
                             <td data-label="Prueba 9: Unidades Compradas"><a href="<?= site_url() ?>Factura/prueba09/<?= $factura['id']?>">Ir</a></td>
                             <td data-label="Prueba 11: IVA"><a href="<?= site_url() ?>Factura/prueba11/<?= $factura['id']?>">Ir</a></td>
                             <td data-label="Ver Tests"><a href="<?= site_url() ?>Factura/listar_test/<?= $factura['id']?>">Ir</a></td>

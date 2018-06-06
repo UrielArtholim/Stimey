@@ -27,6 +27,12 @@
                 <br /><br />
                 <button type="submit">Seleccionar</button>
             </form>
+            <br>
+			<center>
+				<form method=\"POST\" action=\"opcionesSupervisor.php\">
+    				<button type=\"submit\">Volver</button>
+				</form>
+  			</center>
         </center>
     </div>
 </body>

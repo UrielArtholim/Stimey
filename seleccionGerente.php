@@ -20,7 +20,7 @@
 
         case 'revisarSeccion':
             // code...
-            header('Location: seleccion.php');
+            header('Location: seleccionGrupo.php');
             break;
 
          case 'verIncidencias':

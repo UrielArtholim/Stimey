@@ -11,7 +11,7 @@ class Factura extends CI_Controller {
 			$this->load->model('Usuario_model');
 			$this->form_validation->set_message('required', 'El campo %s es obligatorio.');
 			$this->form_validation->set_message('is_unique', 'El campo %s no es único.');
-			$this->form_validation->set_message('integer', 'El campo %s debe ser elegido.');
+			$this->form_validation->set_message('integer', 'El campo %s debe ser entero.');
 			$this->form_validation->set_message('numeric', 'El campo %s debe ser numérico.');
 	}
 	
@@ -68,7 +68,7 @@ class Factura extends CI_Controller {
 				break;
 		}
 
-		$nueva_factura = array(	'id_usuario'	=> $this->input->post('id_usuario'),
+		$nueva_factura = array(	'id_usuario'	=> $_SESSION['id'],
 								'identificacion' => $this->input->post('identificacion'),
 								'descripcion' => $this->input->post('descripcion'),
 								'nombre_emisor' => $this->input->post('nombre_emisor'),
@@ -85,7 +85,6 @@ class Factura extends CI_Controller {
                             	'comentario' => $this->input->post('comentario')
                            	);   			
 
-		$this->form_validation->set_rules('id_usuario', 'Usuario', 'integer');
 		$this->form_validation->set_rules('identificacion', 'Identificación', 'required|is_unique[Factura.identificacion]');
 		$this->form_validation->set_rules('descripcion', 'Descripción', 'required');
 		$this->form_validation->set_rules('nombre_emisor', 'Nombre del Emisor', 'required');
@@ -135,7 +134,7 @@ class Factura extends CI_Controller {
 				break;
 		}
 
-		$nueva_factura = array(	'id_usuario'	=> $this->input->post('id_usuario'),
+		$nueva_factura = array(	'id_usuario'	=> $_SESSION['id'],
 								'identificacion' => $this->input->post('identificacion'),
 								'descripcion' => $this->input->post('descripcion'),
 								'nombre_emisor' => $this->input->post('nombre_emisor'),
@@ -152,7 +151,6 @@ class Factura extends CI_Controller {
                             	'comentario' => $this->input->post('comentario')
                            	);   			
 
-		$this->form_validation->set_rules('id_usuario', 'Usuario', 'integer');
 		$this->form_validation->set_rules('identificacion', 'Identificación', 'required');
 		$this->form_validation->set_rules('descripcion', 'Descripción', 'required');
 		$this->form_validation->set_rules('nombre_emisor', 'Nombre del Emisor', 'required');
@@ -223,12 +221,6 @@ class Factura extends CI_Controller {
 		$datos['factura'] = $this->Factura_model->get_factura_by_id($id);
 
 		$this->load->view('insert_files', $datos);
-	}
-
-	function prueba07($id)
-	{
-		$datos['id'] = $id;
-		$this->load->view('prueba07', $datos);
 	}
 
 	function prueba09($id)

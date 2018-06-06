@@ -23,6 +23,12 @@
             <input type="submit" value="Cargar" name="cargar" onclick="" >
          </div>
       </form>
+      <br>
+	<center>
+		<form method=\"POST\" action=\"opcionesSupervisor.php\">
+        	      <button type=\"submit\">Volver</button>
+		</form>
+  	</center>
 </center>
 </body>
 </html>

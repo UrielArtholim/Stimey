@@ -16,19 +16,6 @@
 		<label>Datos de la Factura:</label><br>
 
         <div>
-            <select id="id_usuario" name="id_usuario">
-                <option value="0.1" selected="selected">Seleccione el usuario</option>
-                <?php foreach($usuarios as $usuario) { ?> 
-                   <option value="<?= $usuario['id'] ?>"
-                        <?php if(isset($factura['id_usuario'])) {
-                            if($usuario['id'] == $factura['id_usuario']) echo "selected=\"selected\"";
-                        } ?>
-                    ><?= $usuario['nombre'] ?></option>
-                <?php } ?>
-            </select>
-        </div>
-
-        <div>
             <input type="text" name="identificacion" placeholder="Id. de la Factura" value="<?php if(isset($factura['identificacion'])) echo $factura['identificacion'];?>">
         </div> 
 
