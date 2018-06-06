@@ -1,7 +1,7 @@
 <?php
 
-    $option = $_POST['option'];
-
+    $option = $_POST['origen'];
+    echo $option;
     if(!isset($_SESSION)){session_start();}
     $grupo = $_SESSION['grupo'];
 
@@ -23,12 +23,7 @@
 
                     case 'inmovilizado':
                         // //Contratacion
-                        if($grupo == 6)
-                            header('Location: Inmovilizado/presubir.php');
-                        else {
-                            header('Location: Inmovilizado/menuSupervisar.php');
-                        }
-                        break;
-
+                    header('Location: Inmovilizado/menuSupervisar.php');
+                    break;
     }
 ?>

@@ -7,7 +7,11 @@
     // Establecemos conexión con la base de datos
     if(!isset($_SESSION)){session_start();}
 
-  	$user_id = $_SESSION['id'];
+    //$user_id = $_SESSION['id'];
+    //$user_group = $_SESSION['group'];
+
+    
+
     $conexion = mysqli_connect ("localhost", "root", "", "Stimey")
     			or die("Error al conectar a la base de datos");
 

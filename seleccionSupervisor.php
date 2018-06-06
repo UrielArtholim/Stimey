@@ -4,7 +4,7 @@
     Used for showing the last 20 modifications
   */
 
-    $option = $_POST['option'];
+    $option = $_POST['origen'];
 
     if(!isset($_SESSION)){session_start();}
 
@@ -13,18 +13,11 @@
 
     echo $option;
     switch ($option) {
-        case 'create':
-            // code...
-            header('Location: crearUsuario.html');
-            break;
-
         case 'revisarSeccion':
-            // code...
-            header('Location: seleccion.php');
+            header('Location: seleccionGrupo.php');
             break;
 
-         case 'verIncidencias':
-            // code...
+         case 'revisarIncidencias':
             header('Location: revisarIncidencias.php');
             break;
     }

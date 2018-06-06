@@ -42,6 +42,8 @@ if($row = mysqli_fetch_array($result)){
 		$_SESSION['id'] = $id_user;
 		$_SESSION['grupo'] = $id_group;
 
+		echo "<script>alert($id_group); </script>";
+
 		$consulta = "SELECT password from usuarios where id = '".$id_user."'";
 		$result = mysqli_query($connection, $consulta);
 		$row = mysqli_fetch_array($result);
@@ -55,36 +57,34 @@ if($row = mysqli_fetch_array($result)){
 		switch ($id_group) {
 			case '1':
 				// code...
-				header('Locaton: opcionesGerente.html');
+				header('Location: opcionesGerente.php');
 				break;
 
 			case '2':
 					// code...
-				header('Locaton: opcionesSupervisor.html');
+				header('Location: opcionesSupervisor.php');
 				break;
 
 			case '3':
 					// code...
-				header('Locaton: homeContract.html');
+				header('Location: Contrataciones/Contrataciones.php');
 				break;
 
 			case '4':
 					// code...
-				header('Locaton: homeSubcontract.html');
+				header('Location: Subcontrataciones/index.php');
 				break;
 
 			case '5':
 				// code...
-				header('Locaton: homeExist.html');
+				header('Location: contratacion.html');
 				break;
 
 			case '6':
 					// code...
-				header('Locaton: homeInmov.html');
+				header('Location: Inmovilizado/presubir.php');
 				break;
-
 		}
-		header("Location: opcionesGerente.html");
 	}else{
 		header("Location: Index.html");
 		exit();
